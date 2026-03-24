@@ -7,13 +7,14 @@ export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser() as { id: string; email: string; role: string } | null;
     if (!user) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
+    
 
     const userAgent = request.headers.get('user-agent') || 'Unknown';
     const ipAddress = request.headers.get('x-forwarded-for') || 

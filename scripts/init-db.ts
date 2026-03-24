@@ -1,4 +1,4 @@
-import { pool, initializeDatabase, countUsers } from '../lib/db';
+import { initializeDatabase, countUsers, query } from '../lib/db';
 import { hashPassword } from '../lib/auth';
 
 async function main() {
@@ -25,11 +25,11 @@ async function main() {
       
       // Create admin user directly
       const id = crypto.randomUUID();
-      await pool.query(
-        `INSERT INTO users (id, email, password_hash, role, status, created_at, updated_at) 
-         VALUES ($1, $2, $3, 'admin', 'approved', NOW(), NOW())`,
-        [id, adminEmail, adminPasswordHash]
-      );
+     await query(
+  `INSERT INTO users (name, email, password_hash, license_start, license_end, role, status) 
+   VALUES ('Admin', $1, $2, NOW(), NOW() + INTERVAL '1 year', 'admin', 'approved')`,
+  [adminEmail, adminPasswordHash]
+);
       
       console.log('[v0] ✓ Default admin user created');
       console.log('[v0] ');

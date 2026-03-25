@@ -83,7 +83,7 @@ export function DashboardHeader() {
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Server className="h-3.5 w-3.5" />
-          <span>Python Backend</span>
+          <span></span>
           <span className="flex items-center gap-1">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
             Connected
